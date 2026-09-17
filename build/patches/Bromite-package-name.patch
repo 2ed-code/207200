@@ -1,6 +1,9 @@
-From: csagan5 <32685696+csagan5@users.noreply.github.com>
-Date: Sat, 8 Jan 2022 19:42:34 +0100
-Subject: Bromite package name
+From: 2ed-code <2ed-code@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 11:00:00 +0000
+Subject: Use 207200 Android package name
+
+Replace the inherited Bromite package name with the custom application
+package used by the 207200 build.
 
 License: GPL-3.0-only - https://spdx.org/licenses/GPL-3.0-only.html
 ---
@@ -14,8 +17,8 @@ diff --git a/chrome/android/chrome_public_apk_tmpl.gni b/chrome/android/chrome_p
    # Android package name to use when compiling the public chrome targets
    # (chrome_public_apk, trichrome_chrome_bundle, etc. as well as the
    # *_bundle variants). This defaults to the Chromium browser package name.
--  chrome_public_manifest_package = "org.chromium.chrome"
-+  chrome_public_manifest_package = "org.bromite.bromite"
+-  chrome_public_manifest_package = "org.bromite.bromite"
++  chrome_public_manifest_package = "com.a207200.browser"
    if (use_stable_package_name_for_trichrome) {
      chrome_public_manifest_package += ".stable"
    } else if (android_channel != "default" && android_channel != "stable") {

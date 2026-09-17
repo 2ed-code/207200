@@ -11,7 +11,7 @@ Set the Chromium product name and short product name to 207200.
 diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
 --- a/chrome/app/chromium_strings.grd
 +++ b/chrome/app/chromium_strings.grd
-@@ -297,12 +297,12 @@
+@@ -297,13 +297,13 @@
    </message>
    </then>
    <else>

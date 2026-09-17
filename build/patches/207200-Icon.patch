@@ -1,0 +1,24 @@
+diff --git a/chrome/android/BUILD.gn b/chrome/android/BUILD.gn
+index e8d95d5..856826a 100644
+--- a/chrome/android/BUILD.gn
++++ b/chrome/android/BUILD.gn
+@@ -9,6 +9,7 @@
+       "java/res_base/values/values.xml",
+       "java/res_base/xml/network_security_config.xml",
+       "java/res_chromium_base/drawable/themed_app_icon.xml",
++      "java/res_chromium_base/drawable-nodpi/207200_icon.png",
+       "java/res_chromium_base/mipmap-hdpi/app_icon.png",
+       "java/res_chromium_base/mipmap-hdpi/layered_app_icon.png",
+       "java/res_chromium_base/mipmap-hdpi/layered_app_icon_background.png",
+@@ -6,7 +6,7 @@
+ found in the LICENSE file.
+ -->
+ 
+ <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android" >
+-    <background android:drawable="@android:color/white"/>
+-    <foreground android:drawable="@mipmap/layered_app_icon"/>
+-    <monochrome android:drawable="@drawable/themed_app_icon"/>
++    <background android:drawable="@android:color/black"/>
++    <foreground android:drawable="@drawable/207200_icon"/>
++    <monochrome android:drawable="@drawable/207200_icon"/>
+ </adaptive-icon>

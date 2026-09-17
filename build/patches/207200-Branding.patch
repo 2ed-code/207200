@@ -1,12 +1,16 @@
 From: 2ed-code <2ed-code@users.noreply.github.com>
 Date: Thu, 17 Sep 2026 00:00:00 +0000
-Subject: 207200 branding
+Subject: 207200 branding and icon
 
-Set the Chromium product name and short product name to 207200.
+Set the Chromium product name to 207200 and install the selected monochrome icon as the Android launcher icon.
 
 ---
- chrome/app/chromium_strings.grd | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ chrome/app/chromium_strings.grd                       | 4 ++--
+ chrome/android/BUILD.gn                               | 1 +
+ chrome/android/java/res_base/drawable/ic_launcher.xml | 6 +++---
+ chrome/android/java/res_base/drawable/ic_launcher_round.xml | 6 +++---
+ chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml | 6 ++++++
+ 5 files changed, 15 insertions(+), 8 deletions(-)
 
 diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
 --- a/chrome/app/chromium_strings.grd
@@ -25,4 +29,55 @@ diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
    </message>
    </else>
    </if>
---
++
++diff --git a/chrome/android/BUILD.gn b/chrome/android/BUILD.gn
++--- a/chrome/android/BUILD.gn
+++++ b/chrome/android/BUILD.gn
++@@ -1,4 +1,5 @@
++       "java/res_base/values/values.xml",
++       "java/res_base/xml/network_security_config.xml",
++       "java/res_chromium_base/drawable/themed_app_icon.xml",
+++      "java/res_chromium_base/drawable-nodpi/207200_icon.xml",
++       "java/res_chromium_base/mipmap-hdpi/app_icon.png",
++
++diff --git a/chrome/android/java/res_base/drawable/ic_launcher.xml b/chrome/android/java/res_base/drawable/ic_launcher.xml
++--- a/chrome/android/java/res_base/drawable/ic_launcher.xml
+++++ b/chrome/android/java/res_base/drawable/ic_launcher.xml
++@@ -6,7 +6,7 @@ found in the LICENSE file.
++ -->
++ 
++ <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android" >
++-    <background android:drawable="@android:color/white"/>
++-    <foreground android:drawable="@mipmap/layered_app_icon"/>
++-    <monochrome android:drawable="@drawable/themed_app_icon"/>
+++    <background android:drawable="@android:color/black"/>
+++    <foreground android:drawable="@drawable/207200_icon"/>
+++    <monochrome android:drawable="@drawable/207200_icon"/>
++ </adaptive-icon>
++
++diff --git a/chrome/android/java/res_base/drawable/ic_launcher_round.xml b/chrome/android/java/res_base/drawable/ic_launcher_round.xml
++--- a/chrome/android/java/res_base/drawable/ic_launcher_round.xml
+++++ b/chrome/android/java/res_base/drawable/ic_launcher_round.xml
++@@ -6,7 +6,7 @@ found in the LICENSE file.
++ -->
++ 
++ <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android" >
++-    <background android:drawable="@mipmap/layered_app_icon_background"/>
++-    <foreground android:drawable="@mipmap/layered_app_icon_foreground"/>
++-    <monochrome android:drawable="@drawable/themed_app_icon"/>
+++    <background android:drawable="@android:color/black"/>
+++    <foreground android:drawable="@drawable/207200_icon"/>
+++    <monochrome android:drawable="@drawable/207200_icon"/>
++ </adaptive-icon>
++
++diff --git a/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml b/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml
++new file mode 100644
++--- /dev/null
+++++ b/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml
++@@ -0,0 +1,6 @@
+++<?xml version="1.0" encoding="utf-8"?>
+++<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
+++    <path android:fillColor="#0B0B0B" android:pathData="M0,0h108v108h-108z"/>
+++    <path android:fillColor="#DADADA" android:pathData="M54,10 C56,25 57,34 70,38 C57,40 56,49 54,54 C52,49 51,40 38,38 C51,34 52,25 54,10z M98,54 C83,56 74,57 70,70 C68,57 59,56 54,54 C59,52 68,51 70,38 C74,51 83,52 98,54z M54,98 C52,83 51,74 38,70 C51,68 52,59 54,54 C56,59 57,68 70,70 C57,74 56,83 54,98z M10,54 C25,52 34,51 38,38 C40,51 49,52 54,54 C49,56 40,57 38,70 C34,57 25,56 10,54z"/>
+++    <path android:fillColor="#F5F5F5" android:pathData="M54,32 A22,22 0,1 0,54 76 A22,22 0,1 0,54 32 M54,39 A15,15 0,1 1,54 69 A15,15 0,1 1,54 39z"/>
+++</vector>

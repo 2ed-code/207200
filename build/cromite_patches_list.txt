@@ -220,6 +220,7 @@ Log-dangling-attributes-in-some-html-elements.patch
 Keep-Side-Panel-Companion-disabled.patch
 Lock-Profile-Cookie-Database.patch
 Cromite-Branding.patch
+207200-Branding.patch
 Disable-Feeback-Collector.patch
 Disable-remote-altsvc-for-h3-connections.patch
 do-not-block-build-incompatible-profiles.patch

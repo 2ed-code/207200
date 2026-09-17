@@ -67,3 +67,49 @@ new file mode 100644
 +    <path android:fillColor="#DADADA" android:pathData="M54,10 C56,25 57,34 70,38 C57,40 56,49 54,54 C52,49 51,40 38,38 C51,34 52,25 54,10z M98,54 C83,56 74,57 70,70 C68,57 59,56 54,54 C59,52 68,51 70,38 C74,51 83,52 98,54z M54,98 C52,83 51,74 38,70 C51,68 52,59 54,54 C56,59 57,68 70,70 C57,74 56,83 54,98z M10,54 C25,52 34,51 38,38 C40,51 49,52 54,54 C49,56 40,57 38,70 C34,57 25,56 10,54z"/>
 +    <path android:fillColor="#F5F5F5" android:pathData="M54,32 A22,22 0,1 0,54 76 A22,22 0,1 0,54 32 M54,39 A15,15 0,1 1,54 69 A15,15 0,1 1,54 39z"/>
 +</vector>
+
+diff --git a/components/browser_ui/styles/android/java/res/values/colors.xml b/components/browser_ui/styles/android/java/res/values/colors.xml
+--- a/components/browser_ui/styles/android/java/res/values/colors.xml
++++ b/components/browser_ui/styles/android/java/res/values/colors.xml
+@@ -10,16 +10,16 @@
+     <color name="gm3_baseline_surface_tint">@color/gm3_baseline_surface_tint_light</color>
+ 
+     <!-- Text colors -->
+     <color name="default_primary_color">#F2F2F2</color>
+-    <color name="input_underline_error_color">#D32F2F</color>
++    <color name="input_underline_error_color">#A0A0A0</color>
+     <color name="explanation_text_color">#909090</color>
+@@ -23,8 +23,8 @@
+     <color name="control_highlight_color" tools:ignore="UnusedResources">
+         @color/default_control_color_highlight_light
+     </color>
+-    <color name="iph_highlight_color">@color/color_primary_with_alpha_10</color>
+-    <color name="menu_highlight_color">@color/gm3_baseline_surface_container_highest_light</color>
++    <color name="iph_highlight_color">#404040</color>
++    <color name="menu_highlight_color">#404040</color>
+@@ -48,12 +48,12 @@
+     <macro name="progress_bar_background">?attr/colorSecondaryContainer</macro>
+     <color name="progress_bar_secondary">@color/baseline_neutral_40</color>
+@@ -53,10 +53,10 @@
+     <!-- Clank Empty States Colors--> 
+-    <color name="empty_state_icon_bg_background_color">@color/material_primary_95</color>
+-    <color name="empty_state_icon_bg_foreground_color">@color/material_primary_90</color>
+-    <color name="empty_state_icon_color">@color/material_primary_40</color>
+-    <color name="empty_state_asset_bg_color">@color/material_primary_90</color>
+-    <color name="empty_state_asset_bg_color_tab_group">@color/material_primary_80</color>
+-    <color name="empty_state_asset_bg_color_tab_container">@color/material_primary_95</color>
+-    <color name="empty_state_asset_bg_color_tab_outline">@color/material_primary_40</color>
+-    <color name="empty_state_asset_bg_color_empty_tab_fill">@color/material_secondary_70</color>
+-    <color name="empty_state_asset_outline_color_primary">@color/material_primary_60</color>
+-    <color name="empty_state_asset_outline_color_secondary">@color/material_secondary_60</color>
++    <color name="empty_state_icon_bg_background_color">#202020</color>
++    <color name="empty_state_icon_bg_foreground_color">#303030</color>
++    <color name="empty_state_icon_color">#D0D0D0</color>
++    <color name="empty_state_asset_bg_color">#303030</color>
++    <color name="empty_state_asset_bg_color_tab_group">#404040</color>
++    <color name="empty_state_asset_bg_color_tab_container">#202020</color>
++    <color name="empty_state_asset_bg_color_tab_outline">#A0A0A0</color>
++    <color name="empty_state_asset_bg_color_empty_tab_fill">#505050</color>
++    <color name="empty_state_asset_outline_color_primary">#B0B0B0</color>
++    <color name="empty_state_asset_outline_color_secondary">#909090</color>
+ </resources>

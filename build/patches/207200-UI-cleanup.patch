@@ -1,0 +1,25 @@
+From: 2ed-code <2ed-code@users.noreply.github.com>
+Date: Thu, 17 Sep 2026 11:10:00 +0000
+Subject: Remove remaining Cromite-branded settings entry
+
+Hide the inherited Cromite flags shortcut from the visible settings UI.
+The underlying flags remain available through the normal Chromium flags
+mechanism and no privacy or ad-blocking functionality is removed.
+
+License: GPL-2.0-or-later - https://spdx.org/licenses/GPL-2.0-or-later.html
+---
+ chrome/android/java/res/xml/privacy_preferences_cromite.xml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/chrome/android/java/res/xml/privacy_preferences_cromite.xml b/chrome/android/java/res/xml/privacy_preferences_cromite.xml
+--- a/chrome/android/java/res/xml/privacy_preferences_cromite.xml
++++ b/chrome/android/java/res/xml/privacy_preferences_cromite.xml
+@@ -111,6 +111,7 @@
+     <org.chromium.chrome.browser.about_settings.HyperlinkPreference
+         android:key="cromite_flags"
+         android:title="@string/cromite_flags_title"
++        app:isPreferenceVisible="false"
+         app:url="@string/cromite_flags_url" />
+ 
+     <org.chromium.components.browser_ui.settings.ChromeSwitchPreference
+--

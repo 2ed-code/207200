@@ -5,14 +5,13 @@ Subject: 207200 branding and icon
 Set the Chromium product name to 207200 and install the selected monochrome icon as the Android launcher icon.
 
 ---
- chrome/app/chromium_strings.grd                       | 4 ++--
- chrome/android/BUILD.gn                               | 1 +
+ chrome/app/chromium_strings.grd | 4 ++--
+ chrome/android/BUILD.gn | 1 +
  chrome/android/java/res_base/drawable/ic_launcher.xml | 6 +++---
  chrome/android/java/res_base/drawable/ic_launcher_round.xml | 6 +++---
  chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml | 6 ++++++
- 5 files changed, 15 insertions(+), 8 deletions(-)
 
-diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
+ diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
 --- a/chrome/app/chromium_strings.grd
 +++ b/chrome/app/chromium_strings.grd
 @@ -297,13 +297,13 @@

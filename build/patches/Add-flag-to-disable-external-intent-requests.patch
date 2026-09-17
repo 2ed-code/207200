@@ -44,7 +44,6 @@ diff --git a/chrome/android/java/res/xml/privacy_preferences.xml b/chrome/androi
      <PreferenceCategory
          android:key="security_section"
        android:title="@string/security_section_title" />
-
 diff --git a/chrome/android/java/src/org/chromium/chrome/browser/customtabs/CustomTabDelegateFactory.java b/chrome/android/java/src/org/chromium/chrome/browser/customtabs/CustomTabDelegateFactory.java
 --- a/chrome/android/java/src/org/chromium/chrome/browser/customtabs/CustomTabDelegateFactory.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/customtabs/CustomTabDelegateFactory.java
@@ -63,8 +62,6 @@ diff --git a/chrome/android/java/src/org/chromium/chrome/browser/customtabs/Cust
 +            if (!sAllowExternalIntentRequests.getInstance().isEnabled()) return true;
              return false;
          }
- 
-
 diff --git a/chrome/android/java/src/org/chromium/chrome/browser/externalnav/ExternalNavigationDelegateImpl.java b/chrome/android/java/src/org/chromium/chrome/browser/externalnav/ExternalNavigationDelegateImpl.java
 --- a/chrome/android/java/src/org/chromium/chrome/browser/externalnav/ExternalNavigationDelegateImpl.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/externalnav/ExternalNavigationDelegateImpl.java
@@ -91,8 +88,6 @@ diff --git a/chrome/android/java/src/org/chromium/chrome/browser/externalnav/Ext
 -                && (DeviceInfo.isDesktop() || params.isInDesktopWindowingMode());
 +                && (params.isInDesktopWindowingMode());
      }
- 
-
 diff --git a/chrome/browser/flags/android/java/src/org/chromium/chrome/browser/flags/cromite/sAllowExternalIntentRequests.java b/chrome/browser/flags/android/java/src/org/chromium/chrome/browser/flags/cromite/sAllowExternalIntentRequests.java
 --- /dev/null
 +++ b/chrome/browser/flags/android/java/src/org/chromium/chrome/browser/flags/cromite/sAllowExternalIntentRequests.java
@@ -130,7 +125,6 @@ diff --git a/chrome/browser/flags/android/java/src/org/chromium/chrome/browser/f
 +        return sInstance;
 +    }
 +}
-
 diff --git a/chrome/browser/ui/android/strings/cromite_android_chrome_strings_grd/Add-flag-to-disable-external-intent-requests.grdp b/chrome/browser/ui/android/strings/cromite_android_chrome_strings_grd/Add-flag-to-disable-external-intent-requests.grdp
 --- /dev/null
 +++ b/chrome/browser/ui/android/strings/cromite_android_chrome_strings_grd/Add-flag-to-disable-external-intent-requests.grdp
@@ -144,7 +138,6 @@ diff --git a/chrome/browser/ui/android/strings/cromite_android_chrome_strings_gr
 +        Allow links to open compatible external apps. Background redirects and external form submissions without a user gesture remain blocked.
 +    </message>
 +</grit-part>
-
 diff --git a/components/external_intents/android/external_intents_features.cc b/components/external_intents/android/external_intents_features.cc
 --- a/components/external_intents/android/external_intents_features.cc
 +++ b/components/external_intents/android/external_intents_features.cc
@@ -163,7 +156,6 @@ diff --git a/components/external_intents/android/external_intents_features.cc b/
    return reinterpret_cast<int64_t>(
        UNSAFE_TODO(kFeaturesExposedToJava[ordinal]));
  }
-
 diff --git a/components/external_intents/android/external_intents_features.h b/components/external_intents/android/external_intents_features.h
 --- a/components/external_intents/android/external_intents_features.h
 +++ b/components/external_intents/android/external_intents_features.h
@@ -174,7 +166,7 @@ diff --git a/components/external_intents/android/external_intents_features.h b/c
 +BASE_DECLARE_FEATURE(kIntentBlockExternalFormRedirectsNoGesture);
  BASE_DECLARE_FEATURE(kExternalNavigationDebugLogs);
  BASE_DECLARE_FEATURE(kDontClobberTabsWithChromeAppId);
- 
+
 diff --git a/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalIntentsFeatures.java b/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalIntentsFeatures.java
 --- a/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalIntentsFeatures.java
 +++ b/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalIntentsFeatures.java
@@ -191,7 +183,6 @@ diff --git a/components/external_intents/android/java/src/org/chromium/component
      public static final String EXTERNAL_NAVIGATION_DEBUG_LOGS_NAME = "ExternalNavigationDebugLogs";
      public static final String DONT_CLOBBER_TABS_WITH_CHROME_APP_ID_NAME =
              "DontClobberTabsWithChromeAppId";
-
 diff --git a/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalNavigationHandler.java b/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalNavigationHandler.java
 --- a/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalNavigationHandler.java
 +++ b/components/external_intents/android/java/src/org/chromium/components/external_intents/ExternalNavigationHandler.java
@@ -248,7 +239,6 @@ new file mode 100644
 +#endif
 +
 +#endif
-
 diff --git a/cromite_flags/chrome/browser/about_flags_cc/Revert-Delete-block-external-form-redirects.inc b/cromite_flags/chrome/browser/about_flags_cc/Revert-Delete-block-external-form-redirects.inc
 new file mode 100644
 --- /dev/null
@@ -269,7 +259,6 @@ new file mode 100644
 +#endif
 +
 +#endif
-
 diff --git a/cromite_flags/chrome/browser/flags/android/chrome_feature_list_cc/Add-flag-to-disable-external-intent-requests.inc b/cromite_flags/chrome/browser/flags/android/chrome_feature_list_cc/Add-flag-to-disable-external-intent-requests.inc
 new file mode 100644
 --- /dev/null
@@ -278,4 +267,3 @@ new file mode 100644
 +CROMITE_FEATURE(kAllowExternalIntentRequests,
 +                "AllowExternalIntentRequests",
 +                base::FEATURE_ENABLED_BY_DEFAULT);
-+--

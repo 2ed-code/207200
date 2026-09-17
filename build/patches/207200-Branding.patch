@@ -87,11 +87,10 @@ diff --git a/components/browser_ui/styles/android/java/res/values/colors.xml b/c
 -    <color name="menu_highlight_color">@color/gm3_baseline_surface_container_highest_light</color>
 +    <color name="iph_highlight_color">#404040</color>
 +    <color name="menu_highlight_color">#404040</color>
-@@ -48,12 +48,12 @@
-     <macro name="progress_bar_background">?attr/colorSecondaryContainer</macro>
-     <color name="progress_bar_secondary">@color/baseline_neutral_40</color>
-@@ -53,10 +53,10 @@
-     <!-- Clank Empty States Colors--> 
+@@ -50,14 +50,14 @@
+     <macro name="default_chip_assistive_text_color_secondary" tools:ignore="UnusedResources">@macro/default_text_color_secondary</macro>
+ 
+     <!-- Clank Empty States Colors-->
 -    <color name="empty_state_icon_bg_background_color">@color/material_primary_95</color>
 -    <color name="empty_state_icon_bg_foreground_color">@color/material_primary_90</color>
 -    <color name="empty_state_icon_color">@color/material_primary_40</color>

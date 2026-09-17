@@ -1,0 +1,34 @@
+name: Build 207200 ARM64
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'build/**'
+      - '.github/workflows/**'
+      - 'docs/**'
+      - 'README.md'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  dispatch-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch ARM64 Cromite build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHA: ${{ github.sha }}
+        run: |
+          gh workflow run build_cromite.yaml \
+            --repo "$GITHUB_REPOSITORY" \
+            --ref master \
+            -f sha="$SHA" \
+            -f target_os=android \
+            -f build=arm64 \
+            -f type=ci \
+            -f debug=false \
+            -f clangd=false

@@ -15,7 +15,6 @@ diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
    </message>
    </else>
    </if>
-
 diff --git a/chrome/android/BUILD.gn b/chrome/android/BUILD.gn
 --- a/chrome/android/BUILD.gn
 +++ b/chrome/android/BUILD.gn
@@ -25,7 +24,6 @@ diff --git a/chrome/android/BUILD.gn b/chrome/android/BUILD.gn
        "java/res_chromium_base/drawable/themed_app_icon.xml",
 +      "java/res_chromium_base/drawable-nodpi/207200_icon.xml",
        "java/res_chromium_base/mipmap-hdpi/app_icon.png",
-
 diff --git a/chrome/android/java/res_base/drawable/ic_launcher.xml b/chrome/android/java/res_base/drawable/ic_launcher.xml
 --- a/chrome/android/java/res_base/drawable/ic_launcher.xml
 +++ b/chrome/android/java/res_base/drawable/ic_launcher.xml
@@ -40,7 +38,6 @@ diff --git a/chrome/android/java/res_base/drawable/ic_launcher.xml b/chrome/andr
 +    <foreground android:drawable="@drawable/207200_icon"/>
 +    <monochrome android:drawable="@drawable/207200_icon"/>
  </adaptive-icon>
-
 diff --git a/chrome/android/java/res_base/drawable/ic_launcher_round.xml b/chrome/android/java/res_base/drawable/ic_launcher_round.xml
 --- a/chrome/android/java/res_base/drawable/ic_launcher_round.xml
 +++ b/chrome/android/java/res_base/drawable/ic_launcher_round.xml
@@ -55,7 +52,6 @@ diff --git a/chrome/android/java/res_base/drawable/ic_launcher_round.xml b/chrom
 +    <foreground android:drawable="@drawable/207200_icon"/>
 +    <monochrome android:drawable="@drawable/207200_icon"/>
  </adaptive-icon>
-
 diff --git a/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml b/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml
 new file mode 100644
 --- /dev/null
@@ -67,7 +63,6 @@ new file mode 100644
 +    <path android:fillColor="#DADADA" android:pathData="M54,10 C56,25 57,34 70,38 C57,40 56,49 54,54 C52,49 51,40 38,38 C51,34 52,25 54,10z M98,54 C83,56 74,57 70,70 C68,57 59,56 54,54 C59,52 68,51 70,38 C74,51 83,52 98,54z M54,98 C52,83 51,74 38,70 C51,68 52,59 54,54 C56,59 57,68 70,70 C57,74 56,83 54,98z M10,54 C25,52 34,51 38,38 C40,51 49,52 54,54 C49,56 40,57 38,70 C34,57 25,56 10,54z"/>
 +    <path android:fillColor="#F5F5F5" android:pathData="M54,32 A22,22 0,1 0,54 76 A22,22 0,1 0,54 32 M54,39 A15,15 0,1 1,54 69 A15,15 0,1 1,54 39z"/>
 +</vector>
-
 diff --git a/components/browser_ui/styles/android/java/res/values/colors.xml b/components/browser_ui/styles/android/java/res/values/colors.xml
 --- a/components/browser_ui/styles/android/java/res/values/colors.xml
 +++ b/components/browser_ui/styles/android/java/res/values/colors.xml

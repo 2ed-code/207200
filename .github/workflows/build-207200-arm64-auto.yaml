@@ -9,26 +9,95 @@ on:
       - '.github/workflows/**'
       - 'docs/**'
       - 'README.md'
+  workflow_dispatch:
+    inputs:
+      upstream_image:
+        description: 'Cromite build image tag'
+        required: true
+        default: '153.0.8010.37-11507ac1061b5ea227806f5e84db5a57df6ccf6a'
+        type: string
 
 permissions:
-  actions: write
   contents: read
 
 jobs:
-  dispatch-build:
+  build-arm64:
     runs-on: ubuntu-latest
+    timeout-minutes: 1440
+    env:
+      UPSTREAM_IMAGE: ${{ github.event.inputs.upstream_image || '153.0.8010.37-11507ac1061b5ea227806f5e84db5a57df6ccf6a' }}
+
     steps:
-      - name: Dispatch ARM64 Cromite build
-        env:
-          GH_TOKEN: ${{ github.token }}
-          SHA: ${{ github.sha }}
+      - name: Checkout 207200
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Free runner disk space
+        shell: bash
         run: |
-          gh workflow run build_cromite.yaml \
-            --repo "$GITHUB_REPOSITORY" \
-            --ref master \
-            -f sha="$SHA" \
-            -f target_os=android \
-            -f build=arm64 \
-            -f type=ci \
-            -f debug=false \
-            -f clangd=false
+          set -euxo pipefail
+          sudo rm -rf /usr/local/lib/android /usr/local/share/powershell /usr/share/dotnet
+          sudo rm -rf /opt/ghc /opt/hostedtoolcache/CodeQL
+          sudo docker system prune -af || true
+          df -h
+
+      - name: Pull Cromite build image
+        shell: bash
+        run: |
+          set -euxo pipefail
+          docker pull "uazo/cromite-build:${UPSTREAM_IMAGE}"
+          docker image inspect "uazo/cromite-build:${UPSTREAM_IMAGE}" --format '{{.Size}}'
+
+      - name: Apply 207200 patches and build ARM64 APK
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/dist"
+          chmod 777 "$GITHUB_WORKSPACE/dist"
+
+          docker run --rm \
+            -e TARGET_ISDEBUG=false \
+            -e TARGET_OS=android \
+            -e HOME=/home/lg/working_dir \
+            -v "$GITHUB_WORKSPACE:/home/lg/working_dir/cromite:ro" \
+            -v "$GITHUB_WORKSPACE/dist:/home/lg/working_dir/dist" \
+            "uazo/cromite-build:${UPSTREAM_IMAGE}" \
+            bash -lc '
+              set -euxo pipefail
+              export WORKSPACE=/home/lg/working_dir
+              export PATH=$WORKSPACE/chromium/src/third_party/llvm-build/Release+Asserts/bin:$WORKSPACE/depot_tools:/usr/local/go/bin:$WORKSPACE/mtool/bin:$PATH
+              cd $WORKSPACE/chromium/src
+
+              for patch in \
+                207200-Branding.patch \
+                Bromite-package-name.patch \
+                Add-flag-to-disable-external-intent-requests.patch \
+                Cromite-Branding.patch; do
+                echo "Applying $patch"
+                git apply --check "$WORKSPACE/cromite/build/patches/$patch"
+                git apply "$WORKSPACE/cromite/build/patches/$patch"
+              done
+
+              git diff --check
+
+              rm -rf out/arm64
+              gn gen out/arm64 --args="target_os = \"android\" $(cat $WORKSPACE/cromite/build/cromite.gn_args) target_cpu = \"arm64\""
+              gn args out/arm64 --list --short
+
+              python3 $WORKSPACE/depot_tools/siso.py ninja -C out/arm64 chrome_public_bundle --offline
+              python3 $WORKSPACE/depot_tools/siso.py ninja -C out/arm64 chrome_public_apk --offline
+
+              test -s out/arm64/apks/ChromePublic.apk
+              cp out/arm64/apks/ChromePublic.apk $WORKSPACE/dist/207200-arm64-unsigned.apk
+              cp out/arm64/RELEASE $WORKSPACE/dist/RELEASE 2>/dev/null || true
+              ls -lh $WORKSPACE/dist/
+            '
+
+      - name: Upload 207200 ARM64 APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: 207200-arm64-apk
+          path: dist/207200-arm64-unsigned.apk
+          if-no-files-found: error
+          retention-days: 14

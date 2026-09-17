@@ -11,10 +11,15 @@ on:
       - 'README.md'
   workflow_dispatch:
     inputs:
+      runner:
+        description: 'GitHub runner label with at least 75 GB disk (for example a configured larger/self-hosted runner)'
+        required: true
+        default: 'ubuntu-latest'
+        type: string
       upstream_image:
         description: 'Cromite build image tag'
         required: true
-        default: '153.0.8010.37-11507ac1061b5ea227806f5e84db5a57df6ccf6a'
+        default: '147.0.7727.56-271900671db643de04aa9f909f0dcc3415c8b827'
         type: string
 
 permissions:
@@ -22,10 +27,10 @@ permissions:
 
 jobs:
   build-arm64:
-    runs-on: ubuntu-latest
-    timeout-minutes: 1440
+    runs-on: ${{ github.event.inputs.runner || 'ubuntu-latest' }}
+    timeout-minutes: 360
     env:
-      UPSTREAM_IMAGE: ${{ github.event.inputs.upstream_image || '153.0.8010.37-11507ac1061b5ea227806f5e84db5a57df6ccf6a' }}
+      UPSTREAM_IMAGE: ${{ github.event.inputs.upstream_image || '147.0.7727.56-271900671db643de04aa9f909f0dcc3415c8b827' }}
 
     steps:
       - name: Checkout 207200
@@ -33,14 +38,18 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Free runner disk space
+      - name: Check runner disk space
         shell: bash
         run: |
-          set -euxo pipefail
-          sudo rm -rf /usr/local/lib/android /usr/local/share/powershell /usr/share/dotnet
-          sudo rm -rf /opt/ghc /opt/hostedtoolcache/CodeQL
-          sudo docker system prune -af || true
-          df -h
+          set -euo pipefail
+          df -h /
+          AVAILABLE_GB=$(df -Pk / | awk 'NR==2 {print int($4/1024/1024)}')
+          echo "Available disk: ${AVAILABLE_GB} GB"
+          if [ "$AVAILABLE_GB" -lt 60 ]; then
+            echo "ERROR: This Chromium build needs a runner with substantially more than the 14 GB standard disk." >&2
+            echo "Configure a GitHub larger/self-hosted runner and run this workflow with its runner label." >&2
+            exit 1
+          fi
 
       - name: Pull Cromite build image
         shell: bash
@@ -80,17 +89,13 @@ jobs:
               done
 
               git diff --check
-
               rm -rf out/arm64
               gn gen out/arm64 --args="target_os = \"android\" $(cat $WORKSPACE/cromite/build/cromite.gn_args) target_cpu = \"arm64\""
-              gn args out/arm64 --list --short
-
               python3 $WORKSPACE/depot_tools/siso.py ninja -C out/arm64 chrome_public_bundle --offline
               python3 $WORKSPACE/depot_tools/siso.py ninja -C out/arm64 chrome_public_apk --offline
 
               test -s out/arm64/apks/ChromePublic.apk
               cp out/arm64/apks/ChromePublic.apk $WORKSPACE/dist/207200-arm64-unsigned.apk
-              cp out/arm64/RELEASE $WORKSPACE/dist/RELEASE 2>/dev/null || true
               ls -lh $WORKSPACE/dist/
             '
 

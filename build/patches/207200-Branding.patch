@@ -60,7 +60,7 @@ diff --git a/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xm
 new file mode 100644
 --- /dev/null
 +++ b/chrome/android/java/res_chromium_base/drawable-nodpi/207200_icon.xml
-@@ -0,0 +1,6 @@
+@@ -0,0 +1,5 @@
 +<?xml version="1.0" encoding="utf-8"?>
 +<vector xmlns:android="http://schemas.android.com/apk/res/android" android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
 +    <path android:fillColor="#0B0B0B" android:pathData="M0,0h108v108h-108z"/>

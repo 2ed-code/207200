@@ -25,6 +25,10 @@ enable_openxr=false
 enable_cardboard=false
 is_high_end_android=true
 
+# Keep Chromium Android Widevine/MediaDrm support enabled.
+# Android Widevine is provided by the platform MediaDrm API rather than a bundled CDM.
+enable_widevine = true
+
 # media section
 proprietary_codecs=true
 ffmpeg_branding="Chrome"

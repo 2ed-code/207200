@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{ github.event.inputs.runner || 'ubuntu-latest' }}
     timeout-minutes: 360
     env:
-      UPSTREAM_IMAGE: ${{ github.event.inputs.upstream_image || '147.0.7727.56-271900671db643de04aa9f909f0dcc3415c8b827' }}
+      UPSTREAM_IMAGE: ${{ github.event.inputs.upstream_image || '153.0.8010.37' }}
 
     steps:
       - name: Checkout 207200
@@ -52,11 +52,11 @@ jobs:
             exit 1
           fi
 
-      - name: Pull Cromite build image
+      - name: Pull Chromium 153 build image
         shell: bash
         run: |
           set -euxo pipefail
-          docker pull "uazo/cromite-build:${UPSTREAM_IMAGE}"
+          docker pull "uazo/chromium:${UPSTREAM_IMAGE}"
           docker image inspect "uazo/cromite-build:${UPSTREAM_IMAGE}" --format '{{.Size}}'
 
       - name: Apply 207200 patches and build ARM64 APK

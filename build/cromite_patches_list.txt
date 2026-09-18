@@ -112,7 +112,6 @@ User-agent-customization.patch
 Add-AllowUserCertificates-flag.patch
 Add-IsCleartextPermitted-flag.patch
 Add-flag-for-omnibox-autocomplete-filtering.patch
-Add-flag-to-disable-external-intent-requests.patch
 Enable-share-intent.patch
 Logcat-crash-reports-UI.patch
 Add-flag-to-disable-vibration.patch

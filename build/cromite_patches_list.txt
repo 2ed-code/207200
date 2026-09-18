@@ -87,7 +87,6 @@ Reduce-HTTP-headers-in-DoH-requests-to-bare-minimum.patch
 Revert-flags-remove-disable-pull-to-refresh-effect.patch
 Use-dummy-DFM-installer.patch
 Disable-feeds-support-by-default.patch
-Disable-DRM-media-origin-IDs-preprovisioning.patch
 Disable-smart-selection-by-default.patch
 Guard-for-user-agent-reduction.patch
 Add-menu-item-to-view-source.patch

@@ -18,7 +18,7 @@ on:
         default: 'ubuntu-latest'
         type: string
       upstream_image:
-        description: 'Cromite build image tag'
+        description: 'Chromium build image tag'
         required: true
         default: '153.0.8010.37'
         type: string
@@ -57,7 +57,7 @@ jobs:
         run: |
           set -euxo pipefail
           docker pull "uazo/chromium:${UPSTREAM_IMAGE}"
-          docker image inspect "uazo/cromite-build:${UPSTREAM_IMAGE}" --format '{{.Size}}'
+          docker image inspect "uazo/chromium:${UPSTREAM_IMAGE}" --format '{{.Size}}'
 
       - name: Apply 207200 patches and build ARM64 APK
         shell: bash
@@ -72,7 +72,7 @@ jobs:
             -e HOME=/home/lg/working_dir \
             -v "$GITHUB_WORKSPACE:/home/lg/working_dir/cromite:ro" \
             -v "$GITHUB_WORKSPACE/dist:/home/lg/working_dir/dist" \
-            "uazo/cromite-build:${UPSTREAM_IMAGE}" \
+            "uazo/chromium:${UPSTREAM_IMAGE}" \
             bash -lc '
               set -euxo pipefail
               export WORKSPACE=/home/lg/working_dir

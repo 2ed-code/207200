@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - drm-widevine-v153
     paths:
       - 'build/**'
       - '.github/workflows/**'
@@ -19,7 +20,7 @@ on:
       upstream_image:
         description: 'Cromite build image tag'
         required: true
-        default: '147.0.7727.56-271900671db643de04aa9f909f0dcc3415c8b827'
+        default: '153.0.8010.37'
         type: string
 
 permissions:
@@ -81,7 +82,6 @@ jobs:
               for patch in \
                 207200-Branding.patch \
                 Bromite-package-name.patch \
-                Add-flag-to-disable-external-intent-requests.patch \
                 Cromite-Branding.patch; do
                 echo "Applying $patch"
                 git apply --check "$WORKSPACE/cromite/build/patches/$patch"
